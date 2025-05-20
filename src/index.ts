@@ -1,19 +1,12 @@
-import { IBoard } from  './core/types.ts'
+import { ClassicRuleset } from "./core/ClassicRuleset"
+import { Cpu } from "./core/CpuPlayer"
+import { ClassicGame } from "./core/Game"
+import { HumanPlayer } from "./core/HumanPlayer"
+import { RockPaperScissorsSession } from "./core/RockPaperScissorsSession"
 
-export class Game {
-  private board: GameBoard 
-  private ruleSet: RuleSet
-  private player1: Player 
-  private player2: Player
-
-  constructor(board: GameBoardm, ruleSet: RuleSet, player1: Player, player2: Player ){
-    this.board =  board,
-    this.ruleSet = ruleSet,
-    this.player1 = player1,
-    this.player2 = player2
-  }
-
-  startGame(): void {
-
-  }
-}
+const player = new HumanPlayer()
+const cpu = new Cpu()
+const ruleset = new ClassicRuleset()
+const simpleGame = new RockPaperScissorsSession() 
+const game = new ClassicGame(simpleGame,player,cpu,ruleset);
+game.startGame()
