@@ -1,11 +1,10 @@
-import { BigBangMode, ClassicMode } from "./GameSession";
+import { CpuPlayer } from "./CpuPlayer";
+import { BigBangMode, ClassicMode } from "../types/types"
 import { Player } from "./Player";
 
 export interface Ruleset {
   gameMode: ClassicMode | BigBangMode;
-  roundsToWin: number;
-  roundCounter: number;
 
-  checkRoundWinner(player1: Player, player2: Player): void;
-  declareSessionWinner(player1: Player, player2: Player): Player | null;
+  checkRoundWinner(player: Player, cpu: CpuPlayer): void;
+  declareWinner(player: Player, cpu: CpuPlayer): Player | CpuPlayer | null;
 }
