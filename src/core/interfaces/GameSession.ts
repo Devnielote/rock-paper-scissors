@@ -1,12 +1,18 @@
-export type ClassicPlays = 'rock'|'paper'|'scissors';
-export type BigBangPlays = 'rock'|'paper'|'scissors'|'lizard'|'spock';
-export type ClassicMode = 'classic'
-export type BigBangMode = 'big bang'
+import { ClassicMode, BigBangMode, ClassicPlays, BigBangPlays } from "../types/types";
 
 export interface GameSession {
   gameMode: ClassicMode | BigBangMode;
   availablePlays: ClassicPlays[] | BigBangPlays[];
+  roundsToWin: number;
+  currentRound: number;
+  isGameOver: boolean;
 
-  setGameMode(mode: ClassicMode | BigBangMode): void;
-  setAvailablePlaysBasedOnGameMode(mode:ClassicMode | BigBangMode): void;
+  setGameMode(gameMode: ClassicMode | BigBangMode): void;
+  setAvailablePlaysBasedOnGameMode(gameMode: ClassicMode | BigBangMode): void;
+  setIsGameOver(): void;
+  getRoundsToWin(): number;
+  setRoundsToWin(value:number): void;
+  getCurrentRound():number
+  incrementRoundsToWin(): void;
+  checkIfSessionIsOver(): void;
 }
