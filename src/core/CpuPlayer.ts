@@ -1,19 +1,19 @@
-import { CpuPlayer } from "./interfaces/CpuPlayer";
-import { ClassicPlays, BigBangPlays } from "./types/types";
+import { Cpu } from "./interfaces/Cpu";
+import { ClassicPlays } from "./types/types";
 
-export class Cpu implements CpuPlayer {
-  currentPlay: ClassicPlays | BigBangPlays | null = null;
-  currentPoints: number = 0;
+export class CpuPlayer<TPlay = ClassicPlays> implements Cpu<TPlay> {
+  private currentPlay: TPlay | null = null;
+  private currentPoints: number = 0;
 
-  getCurrentPlay(): ClassicPlays | BigBangPlays | null {
+  getCurrentPlay(): TPlay | null {
       return this.currentPlay;
   }
 
-  makePlay(play: ClassicPlays | BigBangPlays): void {
+  makePlay(play: TPlay): void {
       this.currentPlay = play;
   }
 
-  autoPlay(availablePlays: (ClassicPlays | BigBangPlays)[]): void {
+  autoPlay(availablePlays: TPlay[]): void {
     const random: number = Math.floor(Math.random() * availablePlays.length);
     this.makePlay(availablePlays[random]);
   }

@@ -1,21 +1,18 @@
-import { CpuPlayer } from "./interfaces/CpuPlayer";
-import { Game } from "./interfaces/Game";
-import { GameSession } from "./interfaces/GameSession";
+import { GameSession } from "./interfaces/GameSession"
+import { Cpu } from "./interfaces/Cpu";
+import { Match } from "./interfaces/Match";
 import { Player } from "./interfaces/Player";
 import { Ruleset } from "./interfaces/Ruleset";
-import { BigBangMode, ClassicMode } from "./types/types";
 import { isClassicPlay } from "./utils/isClassicTypeGuard";
 
-export class ClassicGame implements Game{
-  gameMode: ClassicMode | BigBangMode;
-  gameSession: GameSession;
-  player: Player;
-  cpu: CpuPlayer;
-  ruleset: Ruleset;
+export class ClassicGameSession implements GameSession{
+  private gameMatch: Match;
+  private player: Player;
+  private cpu: Cpu;
+  private ruleset: Ruleset;
 
-  constructor(gameSession: GameSession, player:Player, cpu: CpuPlayer, ruleset: Ruleset){
-    this.gameMode = "classic";
-    this.gameSession = gameSession;
+  constructor(gameMatch: Match, player:Player, cpu: Cpu, ruleset: Ruleset){
+    this.gameMatch = gameMatch;
     this.player = player;
     this.cpu = cpu;
     this.ruleset = ruleset;
@@ -27,13 +24,13 @@ export class ClassicGame implements Game{
     do {
       promptUserForTotalRounds = Number(prompt("How many rounds to win?: "));
 
-    } while (!promptUserForTotalRounds || promptUserForTotalRounds !>= 1);
+    } while ( promptUserForTotalRounds <= 0);
 
-    this.gameSession.setRoundsToWin(promptUserForTotalRounds);
+    this.gameMatch.setRoundsToWin(promptUserForTotalRounds);
     
-    while (!this.gameSession.isGameOver){
-      this.gameSession.checkIfSessionIsOver();
-      const availablePlays = this.gameSession.availablePlays;
+    while (!this.gameMatch.getIsGameOver()){
+      this.gameMatch.checkIfSessionIsOver();
+      const availablePlays = this.gameMatch.getAvailablePlays();
       // Player turn
       const playerPlay = prompt(`Enter your play (${availablePlays}): `);
 
@@ -59,9 +56,5 @@ export class ClassicGame implements Game{
 
     const winner = this.ruleset.declareWinner(this.player, this.cpu)
     console.log(winner)
-  }
-
-  endGame(): void {
-      
   }
 }

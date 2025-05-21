@@ -1,12 +1,12 @@
 import { ClassicRuleset } from "./core/ClassicRuleset"
-import { Cpu } from "./core/CpuPlayer"
-import { ClassicGame } from "./core/Game"
+import { CpuPlayer } from "./core/CpuPlayer"
 import { HumanPlayer } from "./core/HumanPlayer"
-import { RockPaperScissorsSession } from "./core/RockPaperScissorsSession"
+import { ClassicMatch } from "./core/ClassicMatch"
+import { ClassicGameSession } from "./core/ClassicGameSession"
 
 const player = new HumanPlayer()
-const cpu = new Cpu()
-const ruleset = new ClassicRuleset()
-const simpleGame = new RockPaperScissorsSession() 
-const game = new ClassicGame(simpleGame,player,cpu,ruleset);
-game.startGame()
+const cpu = new CpuPlayer()
+const classicRuleset = new ClassicRuleset()
+const gameMatch = new ClassicMatch()
+const classicGameSession = new ClassicGameSession(gameMatch, player, cpu, classicRuleset)
+classicGameSession.startGame();

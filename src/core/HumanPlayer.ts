@@ -1,11 +1,11 @@
-import { BigBangPlays, ClassicPlays } from "./types/types";
+import { ClassicPlays } from "./types/types";
 import { Player } from "./interfaces/Player";
 
-export class HumanPlayer implements Player {
-  currentPlay: ClassicPlays | BigBangPlays | null = null;
-  currentPoints: number = 0;
+export class HumanPlayer<TPlays = ClassicPlays> implements Player<TPlays> {
+  private currentPlay: TPlays | null = null;
+  private currentPoints: number = 0;
 
-  makePlay(play: ClassicPlays | BigBangPlays | null): void {
+  makePlay(play: TPlays | null): void {
     this.currentPlay = play;
   }
   

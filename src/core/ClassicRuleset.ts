@@ -1,18 +1,12 @@
-import { ClassicPlays, ClassicMode, BigBangMode } from "./types/types"
+import { ClassicPlays } from "./types/types"
 import { Ruleset } from "./interfaces/Ruleset";
-import { isClassicPlay } from "./utils/isClassicTypeGuard";
-import { CpuPlayer } from "./interfaces/CpuPlayer";
+import { Cpu } from "./interfaces/Cpu";
 import { Player } from "./interfaces/Player";
 
-export class ClassicRuleset implements Ruleset  {
-  gameMode: ClassicMode;
+export class ClassicRuleset implements Ruleset<ClassicPlays>  {
 
-  constructor() {
-    this.gameMode = "classic";
-  }
-
-  checkRoundWinner(player: Player, cpu: CpuPlayer) {
-    if(!player.currentPlay || !cpu.currentPlay) return null; 
+  checkRoundWinner(player: Player<ClassicPlays> , cpu: Cpu<ClassicPlays>): Player | Cpu | null {
+    if(!player.getCurrentPlay() || !cpu.getCurrentPlay()) return null; 
 
    
     const winMap: Record<ClassicPlays, ClassicPlays> = {
@@ -21,23 +15,28 @@ export class ClassicRuleset implements Ruleset  {
       scissors: 'paper'
     };
 
-    if(player.currentPlay === cpu.currentPlay) return null //Empate 
-      
-    if(isClassicPlay(player.currentPlay) && isClassicPlay(cpu.currentPlay)){
-      if (winMap[player.currentPlay] === cpu.currentPlay){
+    if(player.getCurrentPlay() === cpu.getCurrentPlay()) return null //Empate 
+    
+    const [playerPlay, cpuPlay] = [player.getCurrentPlay(), cpu.getCurrentPlay()];
+
+    if(playerPlay !== null && cpuPlay !== null){
+      if(winMap[playerPlay] === cpuPlay) {
         player.incrementCurrentPoints();
+        return player;
       } else {
         cpu.incrementCurrentPoints();
+        return cpu;
       }
+    }else {
+      return null;
     }
+
   }
 
-  declareWinner(player: Player, cpu: CpuPlayer): Player | CpuPlayer | null {
-    if(!player || !cpu) return null;
-    if(player.getCurrentPoints() > cpu.getCurrentPoints()) return player;
-    if(player.getCurrentPoints() < cpu.getCurrentPoints()) return cpu;
-    
-    return null; // Empate
+  declareWinner(player: Player, cpu: Cpu): Player | Cpu | null {
+    const [playerP, cpuP] = [player.getCurrentPoints(), cpu.getCurrentPoints()];
+    if(playerP === cpuP) return null;
+    return playerP > cpuP ? player: cpu;
   }
 
 };

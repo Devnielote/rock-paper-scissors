@@ -1,10 +1,8 @@
 import { BigBangPlays, ClassicPlays } from "../types/types";
 
-export interface Player {
-  currentPlay: ClassicPlays | BigBangPlays | null; 
-  currentPoints: number;
-  makePlay(play:ClassicPlays | BigBangPlays | null):void;
-  getCurrentPlay(): ClassicPlays | BigBangPlays | null;
+export interface Player<TPlays = ClassicPlays | BigBangPlays> {
+  makePlay(play:TPlays | null):void;
+  getCurrentPlay(): TPlays | null;
   getCurrentPoints(): number;
   incrementCurrentPoints(): void;
 }
