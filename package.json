@@ -4,7 +4,8 @@
   "description": "small game using TS",
   "main": "index.js",
   "scripts": {
-    "test": "vistest"
+    "test": "vitest"
+    "build": "tsc --p tsconfig.build.ts"
   },
   "keywords": [
     "ts"

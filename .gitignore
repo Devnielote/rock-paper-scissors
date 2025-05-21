@@ -5,6 +5,8 @@
 /dist/
 design/
 *.sketch
+.vite/
+
 
 # Avoid accidental XD or Figma upload if you convert the design file
 #######################################################
