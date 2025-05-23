@@ -3,13 +3,14 @@ import { Cpu } from "./interfaces/Cpu";
 import { Match } from "./interfaces/Match";
 import { Player } from "./interfaces/Player";
 import { Ruleset } from "./interfaces/Ruleset";
-import { isClassicPlay } from "./utils/isClassicTypeGuard";
 
 export class ClassicGameSession implements GameSession{
   private gameMatch: Match;
   private player: Player;
   private cpu: Cpu;
   private ruleset: Ruleset;
+  // Prompt inyectable temporalmente para los tests
+  readonly getPrompt: (message:string) => string | null = prompt; 
 
   constructor(gameMatch: Match, player:Player, cpu: Cpu, ruleset: Ruleset){
     this.gameMatch = gameMatch;
@@ -31,14 +32,12 @@ export class ClassicGameSession implements GameSession{
     while (!this.gameMatch.getIsGameOver()){
       this.gameMatch.checkIfSessionIsOver();
       const availablePlays = this.gameMatch.getAvailablePlays();
+      
       // Player turn
-      const playerPlay = prompt(`Enter your play (${availablePlays}): `);
+      const playerPlay = this.player.getPlayerPrompt(availablePlays);
+      this.player.makePlay(playerPlay);
 
-      if(playerPlay && isClassicPlay(playerPlay)){
-        this.player.makePlay(playerPlay);
-      }
-
-      if(!playerPlay){
+      if(!playerPlay || playerPlay == null){
         // If no valid play, break loop and ask again 
         console.log("Please, enter a valid play")
         break
