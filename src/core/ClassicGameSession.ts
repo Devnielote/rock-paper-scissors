@@ -3,36 +3,33 @@ import { Cpu } from "./interfaces/Cpu";
 import { Match } from "./interfaces/Match";
 import { Player } from "./interfaces/Player";
 import { Ruleset } from "./interfaces/Ruleset";
+import { UserInterface } from "./interfaces/UserInterface";
 
 export class ClassicGameSession implements GameSession{
   private gameMatch: Match;
   private player: Player;
   private cpu: Cpu;
   private ruleset: Ruleset;
+  private userInterface: UserInterface;
   // Prompt inyectable temporalmente para los tests
   readonly getPrompt: (message:string) => string | null = prompt; 
 
-  constructor(gameMatch: Match, player:Player, cpu: Cpu, ruleset: Ruleset){
+  constructor(gameMatch: Match, player:Player, cpu: Cpu, ruleset: Ruleset, userInterface: UserInterface){
     this.gameMatch = gameMatch;
     this.player = player;
     this.cpu = cpu;
     this.ruleset = ruleset;
+    this.userInterface = userInterface;
   }
 
   startGame(): void {
-    let promptUserForTotalRounds: number;
-
-    do {
-      promptUserForTotalRounds = Number(prompt("How many rounds to win?: "));
-
-    } while ( promptUserForTotalRounds <= 0);
-
-    this.gameMatch.setRoundsToWin(promptUserForTotalRounds);
-    
     while (!this.gameMatch.getIsGameOver()){
       this.gameMatch.checkIfSessionIsOver();
+
       const availablePlays = this.gameMatch.getAvailablePlays();
-      
+      this.userInterface.renderPlayerScore();
+      this.userInterface.renderAvailablePlays(availablePlays);
+
       // Player turn
       const playerPlay = this.player.getPlayerPrompt(availablePlays);
       this.player.makePlay(playerPlay);
