@@ -7,34 +7,32 @@ export class UserInterfaceManager implements UserInterface<string> {
   private cpuPlayResolver: ((play: string) => void) | null = null;
   readonly gameMode: ClassicMode | BigBangMode = "classic"; 
 
-  promptForRounds(): number {
-    let rounds: number;
-    do {
-      rounds = Number(prompt("How many rounds to win?: "));
-    } while  (rounds <= 0);
-    return rounds;
-  };
-
   promptForMode(gameMode: ClassicMode | BigBangMode): void {
     gameMode = gameMode;
   }
 
-  renderPlayerScore(playerPoints: number): void {
-    const scoreElement = document.getElementById('scoreboard')!;
-    scoreElement.textContent = `Score ${playerPoints}`;
+  renderScoreboard(availablePlays: string, playerPoints: number): void {
+    const scoreboardContainer = document.getElementById('scoreboard-container')!;
+    const scoreBoardAvailablePlaysContainer = document.getElementById('scoreboard-availablePlays')!;
+    const scoreBoardPlayerScore = document.getElementById('scoreboard-playerScore')!;
+
+
   }
 
   updatePlayerScore(playerPoints: number): void {
-    const scoreElement = document.getElementById('scoreboard')!;
+    const scoreElement = document.getElementById('score')!;
     scoreElement.innerHTML = "";
-    scoreElement.textContent = `Score ${playerPoints}`;
-  }
+    scoreElement.textContent = `${playerPoints}`;
+  };
 
   renderAvailablePlays(plays: string[]): void {
-    const container = document.getElementById('play-buttons')!;
-    container.innerHTML = "";
+    const playsListElement = document.getElementById('plays-list')!;
+    const playsContainer = document.getElementById('play-buttons')!;
+    playsContainer.innerHTML = "";
     plays.forEach(play => {
+      const playElement = document.createElement('p');
       const button = document.createElement('button');
+      playElement.innerText = play;
       button.textContent = play;
       button.onclick = () => {
         if (this.userPlayResolver) {
@@ -42,7 +40,8 @@ export class UserInterfaceManager implements UserInterface<string> {
           this.userPlayResolver = null;
         }
       };
-      container.appendChild(button);
+      playsListElement.appendChild(playElement);
+      playsContainer.appendChild(button);
     });
   };
 

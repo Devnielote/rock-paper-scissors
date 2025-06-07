@@ -9,6 +9,10 @@ export class CpuPlayer<TPlay = ClassicPlays> implements Cpu<TPlay> {
       return this.currentPlay;
   }
 
+  getPlayerPrompt(availablePlay: TPlay[]): TPlay | null {
+    return null;
+  }
+
   makePlay(play: TPlay): void {
       this.currentPlay = play;
   }

@@ -1,4 +1,4 @@
-import { ClassicMode, BigBangMode, ClassicPlays, BigBangPlays } from "../types/types";
+import { ClassicPlays, BigBangPlays } from "../types/types";
 
 export interface Match {
   getIsGameOver(): boolean;
