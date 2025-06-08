@@ -1,23 +1,35 @@
 import { UserInterface } from "./interfaces/UserInterface";
-import { BigBangMode, ClassicMode } from "./types/types";
+import { BigBangMode, BigBangPlays, ClassicMode, ClassicPlays } from "./types/types";
 
 export class UserInterfaceManager implements UserInterface<string> {
 
-  private userPlayResolver: ((play: string) => void) | null = null;
-  private cpuPlayResolver: ((play: string) => void) | null = null;
+  private userPlayResolver: ((play: ClassicPlays | BigBangPlays) => void) | null = null;
+  private cpuPlayResolver: ((play: ClassicPlays | BigBangPlays) => void) | null = null;
   readonly gameMode: ClassicMode | BigBangMode = "classic"; 
 
   promptForMode(gameMode: ClassicMode | BigBangMode): void {
     gameMode = gameMode;
   }
 
-  renderScoreboard(availablePlays: string, playerPoints: number): void {
+  renderScoreboard(availablePlays: (ClassicPlays | BigBangPlays)[], playerPoints: number): void {
     const scoreboardContainer = document.getElementById('scoreboard-container')!;
-    const scoreBoardAvailablePlaysContainer = document.getElementById('scoreboard-availablePlays')!;
-    const scoreBoardPlayerScore = document.getElementById('scoreboard-playerScore')!;
+    const scoreboardAvailablePlaysContainer = document.getElementById('scoreboard-plays')!;
 
+    const scoreboardPlayerScore = document.getElementById('scoreboard-score')!;
+    scoreboardPlayerScore.innerText = 'Score';
 
-  }
+    const score = document.getElementById('score')!;
+    score.innerText = `${playerPoints}`;
+    scoreboardPlayerScore.append(score);
+
+    availablePlays.forEach(play => {
+      const playText = document.createElement('p');
+      playText.innerText = `${play}`;
+      scoreboardAvailablePlaysContainer.append(playText);
+    });
+
+    scoreboardContainer.append(scoreboardAvailablePlaysContainer, scoreboardPlayerScore);
+  };
 
   updatePlayerScore(playerPoints: number): void {
     const scoreElement = document.getElementById('score')!;
@@ -25,7 +37,7 @@ export class UserInterfaceManager implements UserInterface<string> {
     scoreElement.textContent = `${playerPoints}`;
   };
 
-  renderAvailablePlays(plays: string[]): void {
+  renderAvailablePlays(plays: (ClassicPlays | BigBangPlays)[]): void {
     const playsListElement = document.getElementById('plays-list')!;
     const playsContainer = document.getElementById('play-buttons')!;
     playsContainer.innerHTML = "";
@@ -46,13 +58,13 @@ export class UserInterfaceManager implements UserInterface<string> {
   };
 
   
-  getUserPlay(): Promise<string> {
+  getUserPlay(): Promise<ClassicPlays | BigBangPlays> {
     return new Promise(resolve => {
       this.userPlayResolver = resolve;
     });
   };
 
-  getCpuPlay(): Promise<string> {
+  getCpuPlay(): Promise<ClassicPlays | BigBangPlays> {
     return new Promise(resolve => {
       this.cpuPlayResolver = resolve;
     })
