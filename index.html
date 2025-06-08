@@ -9,7 +9,9 @@
 <body>
   <main>
     <header>
-      <section class="score score_container">
+      <section class="score_container" id="scoreboard-container">
+        <div id="scoreboard-plays"></div>
+        <div id="scoreboard-score"></div>
         <div class="available_plays" id="plays-list">
         </div>
         <div class="player_score">
@@ -20,16 +22,10 @@
     </header>
     <div class="plays_container" id="plays-container">
     </div>
-    <footer></footer>
-      Rules
+    <footer>
 
-      You Picked
-      The House Picked
-
-      You Win
-      You Lose
-
-      Play Again
+    </footer>
   </main>
+  <script type="module" src="./dist/index.js"></script>
 </body>
 </html>
