@@ -27,7 +27,8 @@ export class ClassicGameSession implements GameSession{
       this.gameMatch.checkIfSessionIsOver();
 
       const availablePlays = this.gameMatch.getAvailablePlays();
-      this.userInterface.renderPlayerScore();
+      const playerScore = this.player.getCurrentPoints();
+      this.userInterface.renderScoreboard(availablePlays,playerScore);
       this.userInterface.renderAvailablePlays(availablePlays);
 
       // Player turn
