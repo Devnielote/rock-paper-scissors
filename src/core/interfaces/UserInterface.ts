@@ -4,7 +4,7 @@ import { Player } from "./Player";
 export interface UserInterface<TPlay = ClassicPlays | BigBangPlays> {
   promptForMode(gameMode: ClassicMode | BigBangMode): void;
   renderAvailablePlays(plays: TPlay[]): void;
-  renderScoreboard(availablePlays: TPlay,playerPoints: number): void;
+  renderScoreboard(availablePlays: TPlay[],playerPoints: number): void;
   updatePlayerScore(playerPoints: number): void;
   getUserPlay(): Promise<TPlay>;
   getCpuPlay(): Promise<TPlay>;
