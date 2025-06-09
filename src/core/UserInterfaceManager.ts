@@ -1,3 +1,4 @@
+import { Player } from "./interfaces/Player";
 import { UserInterface } from "./interfaces/UserInterface";
 import { BigBangMode, BigBangPlays, ClassicMode, ClassicPlays } from "./types/types";
 
@@ -38,23 +39,25 @@ export class UserInterfaceManager implements UserInterface<string> {
   };
 
   renderAvailablePlays(plays: (ClassicPlays | BigBangPlays)[]): void {
-    const playsListElement = document.getElementById('plays-list')!;
-    const playsContainer = document.getElementById('play-buttons')!;
+    const playsContainer = document.getElementById('plays-container')!;
+    const buttonsContainer = document.getElementById('plays-buttons')!;
     playsContainer.innerHTML = "";
+    if(!buttonsContainer || !playsContainer){
+      throw new Error("Containers not found in DOM");
+    }
+    
     plays.forEach(play => {
-      const playElement = document.createElement('p');
       const button = document.createElement('button');
-      playElement.innerText = play;
-      button.textContent = play;
+      button.innerText = `${play}`;
       button.onclick = () => {
         if (this.userPlayResolver) {
           this.userPlayResolver(play);
           this.userPlayResolver = null;
         }
       };
-      playsListElement.appendChild(playElement);
-      playsContainer.appendChild(button);
+      buttonsContainer.append(button);
     });
+    playsContainer.append(buttonsContainer);
   };
 
   
@@ -70,17 +73,17 @@ export class UserInterfaceManager implements UserInterface<string> {
     })
   }
 
-  renderUserPlay(play: string): void {
+  renderUserPlay(play: ClassicPlays | BigBangPlays): void {
     const userPlayElement = document.getElementById('player-play')!;
     userPlayElement.textContent = `Player play: ${play}`;
   }
 
-  renderCpuPlay(play: string): void {
+  renderCpuPlay(play: ClassicPlays | BigBangPlays): void {
     const cpuPlayElement = document.getElementById('cpu.play')!;
     cpuPlayElement.textContent = `Cpy play: ${play}`;
   }
 
-  renderRoundWinner(result: string): void {
+  renderRoundWinner(result: Player): void {
     const resultElement = document.getElementById('winner-container')!;
     if (resultElement) resultElement.textContent = `Winner! ${result}`;
   }
