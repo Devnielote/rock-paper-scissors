@@ -4,8 +4,10 @@
   "description": "small game using TS",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
     "test": "vitest",
-    "build": "tsc --project tsconfig.build.json"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "ts"
@@ -13,10 +15,12 @@
   "author": "devnielote",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.15.17",
+    "@types/estree": "^1.0.8",
+    "@types/node": "^22.15.30",
     "gh-pages": "^6.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
+    "vite": "^6.3.5",
     "vitest": "^3.1.3"
   }
 }
