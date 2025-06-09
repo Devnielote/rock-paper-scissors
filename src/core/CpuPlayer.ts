@@ -1,7 +1,7 @@
 import { Cpu } from "./interfaces/Cpu";
-import { ClassicPlays } from "./types/types";
+import { BigBangPlays, ClassicPlays } from "./types/types";
 
-export class CpuPlayer<TPlay = ClassicPlays> implements Cpu<TPlay> {
+export class CpuPlayer<TPlay = ClassicPlays | BigBangPlays> implements Cpu<TPlay> {
   private currentPlay: TPlay | null = null;
   private currentPoints: number = 0;
 
@@ -14,7 +14,7 @@ export class CpuPlayer<TPlay = ClassicPlays> implements Cpu<TPlay> {
   }
 
   makePlay(play: TPlay): void {
-      this.currentPlay = play;
+    this.currentPlay = play;
   }
 
   autoPlay(availablePlays: TPlay[]): void {
