@@ -22,7 +22,7 @@ export class ClassicGameSession implements GameSession{
     this.userInterface = userInterface;
   }
 
-  startGame(): void {
+  async startGame(): Promise<void> {
     while (!this.gameMatch.getIsGameOver()){
       this.gameMatch.checkIfSessionIsOver();
 
@@ -32,23 +32,20 @@ export class ClassicGameSession implements GameSession{
       this.userInterface.renderAvailablePlays(availablePlays);
 
       // Player turn
-      const playerPlay = this.player.getPlayerPrompt(availablePlays);
+
+      const playerPlay = await this.userInterface.getUserPlay();
       this.player.makePlay(playerPlay);
+      this.userInterface.renderUserPlay(playerPlay);
 
-      if(!playerPlay || playerPlay == null){
-        // If no valid play, break loop and ask again 
-        console.log("Please, enter a valid play")
-        break
-      }
-      
-      //Cpu turn 
+      // Cpu turn 
       this.cpu.autoPlay(availablePlays);
-
-      //Check winner of current round and increment current points of the winner
+      const cpuPlay = this.cpu.getCurrentPlay();
+      this.userInterface.renderCpuPlay(cpuPlay);
+      
+      //Check winner of current round and increment winner points 
 
       const currentRoundWinner = this.ruleset.checkRoundWinner(this.player, this.cpu);
       console.log("This round winner is: " + currentRoundWinner)
-
     }
 
     const winner = this.ruleset.declareWinner(this.player, this.cpu)
