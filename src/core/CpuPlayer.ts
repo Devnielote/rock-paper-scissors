@@ -4,6 +4,11 @@ import { BigBangPlays, ClassicPlays } from "./types/types";
 export class CpuPlayer<TPlay = ClassicPlays | BigBangPlays> implements Cpu<TPlay> {
   private currentPlay: TPlay | null = null;
   private currentPoints: number = 0;
+  private name: string = "Cpu";
+
+  getName(): string {
+    return this.name;
+  }
 
   getCurrentPlay(): TPlay | null {
       return this.currentPlay;
