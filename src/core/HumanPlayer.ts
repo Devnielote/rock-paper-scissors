@@ -4,6 +4,11 @@ import { Player } from "./interfaces/Player";
 export class HumanPlayer<TPlays = ClassicPlays> implements Player<TPlays> {
   private currentPlay: TPlays | null = null;
   private currentPoints: number = 0;
+  private name = "Player";
+
+  getName(): string {
+    return this.name;
+  }
 
   makePlay(play: TPlays | null): void {
     this.currentPlay = play;
