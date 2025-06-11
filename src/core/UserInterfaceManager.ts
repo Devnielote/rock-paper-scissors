@@ -93,4 +93,19 @@ export class UserInterfaceManager implements UserInterface<string> {
     }
     resultElement.append(winner);
   }
+
+  renderPlayAgainButton(onClick: () => void): void {
+    const playAgainButtonContainer = document.getElementById('play-again')!;
+    playAgainButtonContainer.innerHTML = "";
+
+    const playAgainButton = document.createElement('button');
+    playAgainButton.innerText = "Play Again";
+
+    playAgainButton.classList.add('play_again_button');
+    
+    playAgainButton.addEventListener('click', onClick);
+
+    playAgainButtonContainer.append(playAgainButton);
+
+  };
 };
