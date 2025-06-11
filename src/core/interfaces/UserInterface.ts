@@ -11,5 +11,5 @@ export interface UserInterface<TPlay = ClassicPlays | BigBangPlays> {
   getCpuPlay(): Promise<TPlay>;
   renderUserPlay(play: TPlay): void;
   renderCpuPlay(play: TPlay): void;
-  renderRoundWinner(result: Player | Cpu): void;
+  renderRoundWinner(result: Player | Cpu | null): void;
 }
