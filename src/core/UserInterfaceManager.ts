@@ -17,9 +17,8 @@ export class UserInterfaceManager implements UserInterface<string> {
     const scoreboardAvailablePlaysContainer = document.getElementById('scoreboard-plays')!;
 
     const scoreboardPlayerScore = document.getElementById('scoreboard-score')!;
-    scoreboardPlayerScore.innerText = 'Score';
 
-    const score = document.getElementById('score')!;
+    const score = document.getElementById('score-points')!;
     score.innerText = `${playerPoints}`;
     scoreboardPlayerScore.append(score);
 
@@ -33,9 +32,9 @@ export class UserInterfaceManager implements UserInterface<string> {
   };
 
   updatePlayerScore(playerPoints: number): void {
-    const scoreElement = document.getElementById('score')!;
-    scoreElement.innerHTML = "";
-    scoreElement.textContent = `${playerPoints}`;
+    const score = document.getElementById('score-points')!;
+    score.innerHTML = "";
+    score.innerText = `${playerPoints}`;
   };
 
   renderAvailablePlays(plays: (ClassicPlays | BigBangPlays)[]): void {
@@ -79,13 +78,19 @@ export class UserInterfaceManager implements UserInterface<string> {
   }
 
   renderCpuPlay(play: ClassicPlays | BigBangPlays): void {
-    const cpuPlayElement = document.getElementById('cpu.play')!;
+    const cpuPlayElement = document.getElementById('cpu-play')!;
     cpuPlayElement.textContent = `Cpy play: ${play}`;
   }
 
-  renderRoundWinner(result: Player): void {
+  renderRoundWinner(result: Player | null): void {
     const resultElement = document.getElementById('winner-container')!;
-    if (resultElement) resultElement.textContent = `Winner! ${result}`;
+    const winner = document.createElement("p");
+    resultElement.innerHTML = ""
+    if(resultElement && result !== null){
+      winner.innerText = `Winner ${result.getName()}`;
+    } else {
+      winner.innerText = `Tie!`;
+    }
+    resultElement.append(winner);
   }
-
 };
