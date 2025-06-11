@@ -42,8 +42,13 @@ export class ClassicGameSession implements GameSession{
       this.userInterface.renderRoundWinner(currentRoundWinner);
       if(currentRoundWinner?.getName() == "Player") {
         this.userInterface.updatePlayerScore(this.player.getCurrentPoints());
-      } 
-      handlePlayerPlay();
+      }
+
+      this.userInterface.renderPlayAgainButton(() => {
+        handlePlayerPlay();
+        const playAgainButtonContainer = document.getElementById("play-again")!;
+        playAgainButtonContainer.innerHTML = "";
+      });
     }
     let playerScore = this.player.getCurrentPoints();
     this.userInterface.renderScoreboard(availablePlays,playerScore);
