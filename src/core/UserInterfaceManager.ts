@@ -12,6 +12,20 @@ export class UserInterfaceManager implements UserInterface<string> {
     gameMode = gameMode;
   }
 
+  cleanWinnersContainer(): void {
+    const playerPlayContainer = document.getElementById('player-play')!;
+    const cpuPlayContainer = document.getElementById('cpu-play')!;
+    const winnerContainer = document.getElementById('winner-container')!;
+    playerPlayContainer.innerHTML = "";
+    cpuPlayContainer.innerHTML = "";
+    winnerContainer.innerHTML = "";
+  }
+
+  cleanAfterPlaySelect(): void {
+    const availablePlaysContainer = document.getElementById('plays-buttons')!;
+    availablePlaysContainer.innerHTML = "";
+  }
+
   renderScoreboard(availablePlays: (ClassicPlays | BigBangPlays)[], playerPoints: number): void {
     const scoreboardContainer = document.getElementById('scoreboard-container')!;
     const scoreboardAvailablePlaysContainer = document.getElementById('scoreboard-plays')!;
@@ -85,9 +99,14 @@ export class UserInterfaceManager implements UserInterface<string> {
   renderRoundWinner(result: Player | null): void {
     const resultElement = document.getElementById('winner-container')!;
     const winner = document.createElement("p");
+    const winnerName = result?.getName();
     resultElement.innerHTML = ""
     if(resultElement && result !== null){
-      winner.innerText = `Winner ${result.getName()}`;
+      if (winnerName !== 'Player') {
+        winner.innerText = "YOU LOSE";
+      } else {
+        winner.innerText = "YOU WIN";
+      }
     } else {
       winner.innerText = `Tie!`;
     }

@@ -13,4 +13,6 @@ export interface UserInterface<TPlay = ClassicPlays | BigBangPlays> {
   renderCpuPlay(play: TPlay): void;
   renderRoundWinner(result: Player | Cpu | null): void;
   renderPlayAgainButton(onClick: () => void):void;
+  cleanWinnersContainer(): void;
+  cleanAfterPlaySelect():void;
 }
