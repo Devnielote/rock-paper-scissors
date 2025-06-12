@@ -27,6 +27,8 @@ export class ClassicGameSession implements GameSession{
     const availablePlays = this.gameMatch.getAvailablePlays();
 
     const handlePlayerPlay  = async () => {
+      this.userInterface.cleanWinnersContainer();
+      this.userInterface.renderAvailablePlays(availablePlays);
       // Player turn
       const playerPlay = await this.userInterface.getUserPlay();
       this.player.makePlay(playerPlay);
@@ -36,6 +38,9 @@ export class ClassicGameSession implements GameSession{
       this.cpu.autoPlay(availablePlays);
       const cpuPlay = this.cpu.getCurrentPlay();
       this.userInterface.renderCpuPlay(cpuPlay);
+
+      //After play selection 
+      this.userInterface.cleanAfterPlaySelect();
 
       //Check winner of current round and increment winner points 
       const currentRoundWinner = this.ruleset.checkRoundWinner(this.player, this.cpu);
@@ -50,9 +55,9 @@ export class ClassicGameSession implements GameSession{
         playAgainButtonContainer.innerHTML = "";
       });
     }
+
     let playerScore = this.player.getCurrentPoints();
     this.userInterface.renderScoreboard(availablePlays,playerScore);
-    this.userInterface.renderAvailablePlays(availablePlays);
     handlePlayerPlay(); 
   }
 }
