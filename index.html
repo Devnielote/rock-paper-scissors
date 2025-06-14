@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="src/main.css">
   <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-  <main>
+  <main class="main_container">
     <header>
       <section class="score_container" id="scoreboard-container">
-        <div id="scoreboard-plays"></div>
-        <div id="scoreboard-score">
+        <div class="score_container_plays" id="scoreboard-plays"></div>
+        <div class="score_container_score" id="scoreboard-score">
           <div class="player_score">
             <p>Score</p>
             <p id="score-points"></p>
@@ -20,16 +20,21 @@
       </section>
     </header>
     <div class="playsButtonsContainer" id="plays-container">
-      <div class="playButtonsList" id="plays-buttons"></div>
+      <div class="playButtonsList" id="plays-buttons">
+      </div>
     </div>
     <div class="playersPlaysContainer" id="playersPlaysContainer">
-      <div class="playerPlayContainer" id="player-play"></div>
-      <div class="cpuPlayContainer" id="cpu-play"></div>
+      <div class="playerPlayContainer" id="player-play">
+      </div>
+      <div class="cpuPlayContainer" id="cpu-play">
+      </div>
     </div>
-    <div class="winnerContainer" id="winner-container"></div>
-    <div class="play_again_button" id="play-again"></div>
+    <div class="winner_container" id="winner-container">
+    </div>
+    <div class="play_again_button" id="play-again">
+    </div>
     <footer>
-        Rules
+      <button>RULES</button>
     </footer>
   </main>
   <script type="module" src="./src/index.ts"></script>
