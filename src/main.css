@@ -1,1 +1,223 @@
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("../src/assets/fonts/BarlowSemiCondensed-SemiBold.ttf");
+  font-weight: 600; 
+}
 
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("../src/assets/fonts/BarlowSemiCondensed-Black.ttf");
+  font-weight: 700;
+}
+
+:root {
+  --dark-text: hsl(299,25%,31%);
+  --score-text: hsl(229, 64%, 46%);
+  --header-outline: hsl(217,16%, 45%);
+
+  --scissors-gradient: hsl(39,89%,49%);
+  --scissors-gradient2: hsl(40,84%, 53%);
+
+  --paper-gradient: hsl(230, 89%, 62%);
+  --paper-gradient2: hsl(230, 89%, 65%);
+
+  --rock-gradient: hsl(349, 71%, 52%);
+  --rock-gradient2: hsl(349, 70%, 56%);
+
+  --lizard-gradient: hsl(261, 73%, 60%);
+  --lizard-gradient2: hsl(261, 72%, 63%);
+
+  --spock-gradient: hsl(189, 59%, 53%);
+  --spock-gradient2: hsl(189, 58%, 57%);
+
+  --background-radial: hsl(214, 47%, 23%);
+  --background-radial2: hsl(237, 47%, 15%);
+}
+
+@layer reset {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+  html,body {
+    height: 100%;
+  }
+
+  body {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    line-height: 1.5;
+  }
+
+
+  a {
+    text-decoration: none;
+    color: inherit
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  button, input, select{
+    border: none;
+    outline:none;
+    background: none;
+  }
+}
+
+@layer base {
+  h1, h2, p {
+    font-family: "Barlow Semi Condensed";
+    color: white;
+  }
+
+  button {
+    width: 100px;
+    height: 25px;
+    letter-spacing: 1px;
+    background-color: white;
+    border-radius: 3px;
+    font-size: .6rem;
+    color: var(--header-outline);
+  }
+
+  .main_container {
+    background: linear-gradient(to bottom, var(--background-radial), var(--background-radial2));
+  }
+}
+
+@layer layout {
+  .main_container {
+    header {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+      .score_container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        min-width: 230px;
+        max-width: 350px;
+        padding-inline-start: 1rem;
+        padding-inline-end: .4rem;
+        padding-block: .5rem;
+        border: 2px solid var(--header-outline);
+        border-radius: 4px;
+      }
+
+      .score_container_plays {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: .7rem;
+      }
+
+      .score_container_score {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 3.5rem;
+        height: 3rem;
+        padding-inline: .6rem;
+        padding-block: .2rem;
+        text-align: center;
+        background-color: white;
+        border-radius: 3px;
+        line-height: 1rem;
+        
+        p {
+          font-size: .6rem;
+          color: var(--score-text);
+          letter-spacing: 1px;
+        }
+        
+        span {
+          color: var(--dark-text);
+        }
+      }
+
+    }
+
+    .playsButtonsContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .playButtonsList {
+      background: url('../src/assets/images/bg-triangle.svg');
+      background-size: 10rem;
+      background-clip: content-box;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      min-width: 260px;
+      max-width: 280px;
+      margin-block-start: 3rem;
+      button {
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+      }
+    }
+
+    .winner_container {
+      display: flex;
+      justify-content: center;
+      margin-block-start: 5rem;
+      font-size: 2.5rem;
+    }
+
+    .play_again_button {
+      width: 150px;
+      height: 35px;
+      border-radius: 5px;
+      font-size: .8rem;
+      margin: 0 auto;
+    }
+
+   footer {
+      display: flex;
+      justify-content: center;
+
+      button {
+        width: 5.8rem;
+        height: 2rem;
+        letter-spacing: 2px;
+        border: 1.5px solid var(--header-outline);
+        border-radius: 5px;
+        background-color: transparent;
+        font-size: .8rem;
+        color: white;
+      }
+    }
+  }
+}
+
+@layer utils {
+
+  .hide {
+    display: none;
+  }
+  .red_outline {
+    border: 3px solid red;
+  }
+
+  .blue_outline {
+    border: 3px solid blue;
+  }
+
+  .yellow_outline {
+    border: 3px solid yellow;
+  }
+
+}
