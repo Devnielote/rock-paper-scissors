@@ -147,26 +147,52 @@
     .playsButtonsContainer {
       display: flex;
       justify-content: center;
+
+      .playButtonsList {
+        background: url('../src/assets/images/bg-triangle.svg');
+        background-size: 200px;
+        background-clip: content-box;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-y: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        min-width: 260px;
+        max-width: 280px;
+        margin-block-start: 3rem;
+
+        button {
+          width: 90px;
+          height: 90px;
+          border-radius: 100%;
+          background-repeat: no-repeat;
+          background-size: 50%;
+          background-position: center;
+          background-color: white;
+        }
+      }
     }
 
-    .playButtonsList {
-      background: url('../src/assets/images/bg-triangle.svg');
-      background-size: 10rem;
-      background-clip: content-box;
-      background-position: center;
-      background-repeat: no-repeat;
+    .players_play_container {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-around;
-      width: 100%;
-      min-width: 260px;
-      max-width: 280px;
-      margin-block-start: 3rem;
-      button {
-        width: 100px;
-        height: 100px;
-        border-radius: 100%;
+      justify-content: space-evenly;
+
+      .player_play, .cpu_play {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button {
+          width: 90px;
+          height: 90px;
+          border-radius: 100%;
+          background-repeat: no-repeat;
+          background-size: 50%;
+          background-position: center;
+          background-color: white;
+        }
       }
     }
 
@@ -175,6 +201,7 @@
       justify-content: center;
       margin-block-start: 5rem;
       font-size: 2.5rem;
+
     }
 
     .play_again_button {
@@ -208,16 +235,25 @@
   .hide {
     display: none;
   }
-  .red_outline {
-    border: 3px solid red;
+
+  .button_outline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
   }
 
-  .blue_outline {
-    border: 3px solid blue;
+  .button_outline_rock {
+    background: linear-gradient(var(--rock-gradient), var(--rock-gradient2));
   }
 
-  .yellow_outline {
-    border: 3px solid yellow;
+  .button_outline_paper {
+    background: linear-gradient(var(--paper-gradient), var(--paper-gradient2));
   }
 
+  .button_outline_scissors {
+    background: linear-gradient(var(--scissors-gradient), var(--scissors-gradient2));
+  }
 }
