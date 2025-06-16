@@ -4,7 +4,7 @@ import { Match } from "./interfaces/Match";
 import { Player } from "./interfaces/Player";
 import { Ruleset } from "./interfaces/Ruleset";
 import { UserInterface } from "./interfaces/UserInterface";
-import { UserInterfaceManager } from "./UserInterfaceManager";
+import { delay } from "./utils/delay";
 
 export class ClassicGameSession implements GameSession{
   private gameMatch: Match;
@@ -34,21 +34,25 @@ export class ClassicGameSession implements GameSession{
       this.player.makePlay(playerPlay);
       this.userInterface.renderUserPlay(playerPlay);
 
+      this.userInterface.cleanAfterPlaySelect();
+
       // Cpu turn 
+      await delay(1300);
       this.cpu.autoPlay(availablePlays);
       const cpuPlay = this.cpu.getCurrentPlay();
       this.userInterface.renderCpuPlay(cpuPlay);
 
       //After play selection 
-      this.userInterface.cleanAfterPlaySelect();
 
       //Check winner of current round and increment winner points 
       const currentRoundWinner = this.ruleset.checkRoundWinner(this.player, this.cpu);
+      delay(600);
       this.userInterface.renderRoundWinner(currentRoundWinner);
       if(currentRoundWinner?.getName() == "Player") {
         this.userInterface.updatePlayerScore(this.player.getCurrentPoints());
       }
 
+      await delay(1500);
       this.userInterface.renderPlayAgainButton(() => {
         handlePlayerPlay();
         const playAgainButtonContainer = document.getElementById("play-again")!;
