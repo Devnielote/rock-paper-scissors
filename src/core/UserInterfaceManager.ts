@@ -38,7 +38,7 @@ export class UserInterfaceManager implements UserInterface<string> {
 
     availablePlays.forEach(play => {
       const playText = document.createElement('p');
-      playText.innerText = `${play}`;
+      playText.innerText = `${play.toUpperCase()}`;
       scoreboardAvailablePlaysContainer.append(playText);
     });
 
@@ -52,23 +52,29 @@ export class UserInterfaceManager implements UserInterface<string> {
   };
 
   renderAvailablePlays(plays: (ClassicPlays | BigBangPlays)[]): void {
-    const playsContainer = document.getElementById('plays-container')!;
-    const buttonsContainer = document.getElementById('plays-buttons')!;
-    playsContainer.innerHTML = "";
+    const playsContainer = document.getElementById('plays-container');
+    const buttonsContainer = document.getElementById('plays-buttons');
     if(!buttonsContainer || !playsContainer){
       throw new Error("Containers not found in DOM");
     }
+    playsContainer.innerHTML = "";
     
     plays.forEach(play => {
+      const buttonContainer = document.createElement('div');
       const button = document.createElement('button');
-      button.innerText = `${play}`;
+
+      buttonContainer.classList.add(`button_outline_${play}`);
+      buttonContainer.classList.add('button_outline');
+
+      button.style.backgroundImage = `url('../src/assets/images/icon-${play}.svg')`
       button.onclick = () => {
         if (this.userPlayResolver) {
           this.userPlayResolver(play);
           this.userPlayResolver = null;
         }
       };
-      buttonsContainer.append(button);
+      buttonContainer.append(button);
+      buttonsContainer.append(buttonContainer);
     });
     playsContainer.append(buttonsContainer);
   };
@@ -87,13 +93,36 @@ export class UserInterfaceManager implements UserInterface<string> {
   }
 
   renderUserPlay(play: ClassicPlays | BigBangPlays): void {
+    const buttonContainer = document.createElement('div');  
+    const button = document.createElement('button');
+    const text = document.createElement('p');
+
+    text.innerText = "YOU PICKED";
+
+    button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
+    buttonContainer.classList.add(`button_outline_${play}`);
+    buttonContainer.classList.add('button_outline');
+
+    buttonContainer.append(button);
+
     const userPlayElement = document.getElementById('player-play')!;
-    userPlayElement.textContent = `Player play: ${play}`;
+    userPlayElement.append(buttonContainer, text);
   }
 
   renderCpuPlay(play: ClassicPlays | BigBangPlays): void {
-    const cpuPlayElement = document.getElementById('cpu-play')!;
-    cpuPlayElement.textContent = `Cpy play: ${play}`;
+    const buttonContainer = document.createElement('div');  
+    const button = document.createElement('button');
+    const text = document.createElement('p');
+
+    text.innerText = "THE HOUSE PICKED";
+
+    button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
+    buttonContainer.classList.add(`button_outline_${play}`);
+    buttonContainer.classList.add('button_outline');
+    buttonContainer.append(button);
+
+    const userPlayElement = document.getElementById('cpu-play')!;
+    userPlayElement.append(buttonContainer,text);
   }
 
   renderRoundWinner(result: Player | null): void {
