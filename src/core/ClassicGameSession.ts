@@ -26,7 +26,7 @@ export class ClassicGameSession implements GameSession{
   startGame(): void {
     const availablePlays = this.gameMatch.getAvailablePlays();
 
-    const handlePlayerPlay  = async () => {
+    const handlePlayerPlay = async () => {
       this.userInterface.cleanWinnersContainer();
       this.userInterface.renderAvailablePlays(availablePlays);
       // Player turn
@@ -37,7 +37,7 @@ export class ClassicGameSession implements GameSession{
       this.userInterface.cleanAfterPlaySelect();
 
       // Cpu turn 
-      await delay(1300);
+      await delay(1300)
       this.cpu.autoPlay(availablePlays);
       const cpuPlay = this.cpu.getCurrentPlay();
       this.userInterface.renderCpuPlay(cpuPlay);
@@ -46,13 +46,13 @@ export class ClassicGameSession implements GameSession{
 
       //Check winner of current round and increment winner points 
       const currentRoundWinner = this.ruleset.checkRoundWinner(this.player, this.cpu);
-      delay(600);
+      await delay(600);
       this.userInterface.renderRoundWinner(currentRoundWinner);
       if(currentRoundWinner?.getName() == "Player") {
         this.userInterface.updatePlayerScore(this.player.getCurrentPoints());
       }
 
-      await delay(1500);
+      await delay(1000);
       this.userInterface.renderPlayAgainButton(() => {
         handlePlayerPlay();
         const playAgainButtonContainer = document.getElementById("play-again")!;
