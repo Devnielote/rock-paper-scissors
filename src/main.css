@@ -86,18 +86,17 @@
     font-size: .6rem;
     color: var(--header-outline);
   }
-
-  .main_container {
-    background: linear-gradient(to bottom, var(--background-radial), var(--background-radial2));
-  }
 }
 
 @layer layout {
   .main_container {
+    padding-block-start: 2rem;
+    padding-inline: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, var(--background-radial), var(--background-radial2));
     header {
       display: flex;
       justify-content: center;
-      padding: 1.5rem;
       .score_container {
         display: flex;
         justify-content: space-between;
@@ -115,7 +114,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        line-height: .7rem;
+        line-height: .8rem;
       }
 
       .score_container_score {
@@ -147,21 +146,22 @@
     .playsButtonsContainer {
       display: flex;
       justify-content: center;
+      margin-block-start: 4rem;
 
       .playButtonsList {
         background: url('../src/assets/images/bg-triangle.svg');
-        background-size: 200px;
+        background-size: 90% 200px;
         background-clip: content-box;
         background-position: center;
         background-repeat: no-repeat;
         background-position-y: 50px;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: space-around;
+        align-items: center;
         width: 100%;
-        min-width: 260px;
-        max-width: 280px;
+        min-width: 300px;
+        max-width: 300px;
         margin-block-start: 3rem;
 
         button {
@@ -178,12 +178,17 @@
 
     .players_play_container {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
+      width: 100%;
+      min-width: 300px;
+      max-width: 300px;
+      margin: 0 auto;
 
       .player_play, .cpu_play {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         button {
           width: 90px;
           height: 90px;
@@ -199,25 +204,27 @@
     .winner_container {
       display: flex;
       justify-content: center;
-      margin-block-start: 5rem;
-      font-size: 2.5rem;
+      margin-block-start: 4rem;
+      font-size: 3rem;
 
     }
 
     .play_again_button {
-      width: 150px;
+      width: 180px;
       height: 35px;
-      border-radius: 5px;
-      font-size: .8rem;
       margin: 0 auto;
+      margin-block-start: .2rem;
+      margin-block-end: 2rem;
+      font-size: .8rem;
+      border-radius: 5px;
     }
 
    footer {
       display: flex;
       justify-content: center;
-
+      padding-block-end: 1rem;
       button {
-        width: 5.8rem;
+        width: 7rem;
         height: 2rem;
         letter-spacing: 2px;
         border: 1.5px solid var(--header-outline);
@@ -240,6 +247,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-block-end: 2rem;
     width: 120px;
     height: 120px;
     border-radius: 100%;
