@@ -138,6 +138,7 @@
         
         span {
           color: var(--dark-text);
+          font-size: 1.5rem;
         }
       }
 
