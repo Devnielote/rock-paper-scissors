@@ -2,7 +2,7 @@ import { Match } from "./interfaces/Match";
 import { BigBangPlays, ClassicMode, ClassicPlays } from "./types/types";
 
 export class ClassicMatch implements Match {
-  private availablePlays: ClassicPlays[] = ['paper','scissors','rock'];
+  private availablePlays: ClassicPlays[] = ['rock','paper','scissors'];
   private isGameOver: boolean = false;
   private roundsToWin: number = 0;
   private currentRound: number = 0;
