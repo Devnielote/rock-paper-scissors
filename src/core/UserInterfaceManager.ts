@@ -110,18 +110,19 @@ export class UserInterfaceManager implements UserInterface<string> {
   }
 
   renderCpuPlay(play: ClassicPlays | BigBangPlays): void {
+    const userPlayElement = document.getElementById('cpu-play')!;
     const buttonContainer = document.createElement('div');  
     const button = document.createElement('button');
-    const text = document.createElement('p');
 
+    const text = document.createElement('p');
     text.innerText = "THE HOUSE PICKED";
+
 
     button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
     buttonContainer.classList.add(`button_outline_${play}`);
     buttonContainer.classList.add('button_outline');
     buttonContainer.append(button);
 
-    const userPlayElement = document.getElementById('cpu-play')!;
     userPlayElement.append(buttonContainer,text);
   }
 
@@ -147,7 +148,7 @@ export class UserInterfaceManager implements UserInterface<string> {
     playAgainButtonContainer.innerHTML = "";
 
     const playAgainButton = document.createElement('button');
-    playAgainButton.innerText = "Play Again";
+    playAgainButton.innerText = "PLAY AGAIN";
 
     playAgainButton.classList.add('play_again_button');
     
