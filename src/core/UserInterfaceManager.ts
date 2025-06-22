@@ -1,6 +1,7 @@
 import { Player } from "./interfaces/Player";
 import { UserInterface } from "./interfaces/UserInterface";
 import { BigBangMode, BigBangPlays, ClassicMode, ClassicPlays } from "./types/types";
+import { delay } from "./utils/delay";
 
 export class UserInterfaceManager implements UserInterface<string> {
 
@@ -13,17 +14,36 @@ export class UserInterfaceManager implements UserInterface<string> {
   }
 
   cleanWinnersContainer(): void {
-    const playerPlayContainer = document.getElementById('player-play')!;
-    const cpuPlayContainer = document.getElementById('cpu-play')!;
-    const winnerContainer = document.getElementById('winner-container')!;
+    const availablePlaysContainer = document.getElementById('plays-container')!;
+    availablePlaysContainer.classList.remove('hide');
+    
+    const resultsContainer = document.getElementById('results-container')!;
+    //resultsContainer.classList.add('hide');
+
+    const playerPlayContainer = document.getElementById('player-play-container')!;
     playerPlayContainer.innerHTML = "";
+
+    const cpuPlayContainer = document.getElementById('cpu-play-container')!;
     cpuPlayContainer.innerHTML = "";
+
+    const winnerContainer = document.getElementById('winner-container')!;
     winnerContainer.innerHTML = "";
+
+    const footer = document.getElementById('footer')!;
+    footer.style.marginTop = '0';
   }
 
   cleanAfterPlaySelect(): void {
-    const availablePlaysContainer = document.getElementById('plays-buttons')!;
-    availablePlaysContainer.innerHTML = "";
+    const resultsContainer = document.getElementById('results-container')!;
+    resultsContainer.classList.remove('hide');
+
+    const availablePlaysContainer = document.getElementById('plays-container')!;
+    availablePlaysContainer.classList.add('hide');
+    const availablePlaysButtons = document.getElementById('available-plays')!;
+    availablePlaysButtons.innerHTML = "";
+    const footer = document.getElementById('footer')!; 
+    footer.style.marginTop = '3rem';
+
   }
 
   renderScoreboard(availablePlays: (ClassicPlays | BigBangPlays)[], playerPoints: number): void {
@@ -52,19 +72,19 @@ export class UserInterfaceManager implements UserInterface<string> {
   };
 
   renderAvailablePlays(plays: (ClassicPlays | BigBangPlays)[]): void {
-    const playsContainer = document.getElementById('plays-container');
-    const buttonsContainer = document.getElementById('plays-buttons');
-    if(!buttonsContainer || !playsContainer){
+    const altPlaysContainer = document.getElementById('plays-container')!;
+    const altPlays = document.getElementById('available-plays')!;
+
+    if(!altPlaysContainer || !altPlays){
       throw new Error("Containers not found in DOM");
     }
-    playsContainer.innerHTML = "";
-    
+
     plays.forEach(play => {
-      const buttonContainer = document.createElement('div');
+      const buttonOutlineElement = document.createElement('div');
       const button = document.createElement('button');
 
-      buttonContainer.classList.add(`button_outline_${play}`);
-      buttonContainer.classList.add('button_outline');
+      buttonOutlineElement.classList.add('button_outline');
+      buttonOutlineElement.classList.add(`button_outline_${play}`);
 
       button.style.backgroundImage = `url('../src/assets/images/icon-${play}.svg')`
       button.onclick = () => {
@@ -73,10 +93,10 @@ export class UserInterfaceManager implements UserInterface<string> {
           this.userPlayResolver = null;
         }
       };
-      buttonContainer.append(button);
-      buttonsContainer.append(buttonContainer);
+      buttonOutlineElement.append(button);
+      altPlays.append(buttonOutlineElement);
     });
-    playsContainer.append(buttonsContainer);
+    altPlaysContainer.append(altPlays);
   };
 
   
@@ -100,17 +120,18 @@ export class UserInterfaceManager implements UserInterface<string> {
     text.innerText = "YOU PICKED";
 
     button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
-    buttonContainer.classList.add(`button_outline_${play}`);
     buttonContainer.classList.add('button_outline');
+    buttonContainer.classList.add(`button_outline_${play}`);
 
     buttonContainer.append(button);
 
-    const userPlayElement = document.getElementById('player-play')!;
-    userPlayElement.append(buttonContainer, text);
+    const userPlayContainer = document.getElementById('player-play-container')!;
+    userPlayContainer.append(buttonContainer, text);
   }
 
   renderCpuPlay(play: ClassicPlays | BigBangPlays): void {
-    const userPlayElement = document.getElementById('cpu-play')!;
+    const cpuPlayContainer = document.getElementById('cpu-play-container')!;
+
     const buttonContainer = document.createElement('div');  
     const button = document.createElement('button');
 
@@ -119,18 +140,21 @@ export class UserInterfaceManager implements UserInterface<string> {
 
 
     button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
-    buttonContainer.classList.add(`button_outline_${play}`);
     buttonContainer.classList.add('button_outline');
+    buttonContainer.classList.add(`button_outline_${play}`);
     buttonContainer.append(button);
 
-    userPlayElement.append(buttonContainer,text);
+    cpuPlayContainer.append(buttonContainer, text)
   }
 
   renderRoundWinner(result: Player | null): void {
+    const resultsContainer = document.getElementById('results-container')!;
+    resultsContainer.classList.remove('hide');
+    const winnerContainer = document.getElementById('winner-container')!;
+
     const resultElement = document.getElementById('winner-container')!;
     const winner = document.createElement("p");
     const winnerName = result?.getName();
-    resultElement.innerHTML = ""
     if(resultElement && result !== null){
       if (winnerName !== 'Player') {
         winner.innerText = "YOU LOSE";
@@ -140,21 +164,22 @@ export class UserInterfaceManager implements UserInterface<string> {
     } else {
       winner.innerText = `Tie!`;
     }
+    winnerContainer.append(winner);
     resultElement.append(winner);
   }
 
   renderPlayAgainButton(onClick: () => void): void {
-    const playAgainButtonContainer = document.getElementById('play-again')!;
-    playAgainButtonContainer.innerHTML = "";
+    const winnerContainer = document.getElementById('winner-container')!; 
+
+    const playAgainButtonContainer = document.createElement('div')!; 
+    playAgainButtonContainer.classList.add('play_again_button');
 
     const playAgainButton = document.createElement('button');
     playAgainButton.innerText = "PLAY AGAIN";
 
-    playAgainButton.classList.add('play_again_button');
-    
     playAgainButton.addEventListener('click', onClick);
-
     playAgainButtonContainer.append(playAgainButton);
 
+    winnerContainer.append(playAgainButtonContainer);
   };
 };
