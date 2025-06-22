@@ -55,8 +55,6 @@ export class ClassicGameSession implements GameSession{
       await delay(1000);
       this.userInterface.renderPlayAgainButton(() => {
         handlePlayerPlay();
-        const playAgainButtonContainer = document.getElementById("play-again")!;
-        playAgainButtonContainer.innerHTML = "";
       });
     }
 
