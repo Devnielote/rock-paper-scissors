@@ -162,7 +162,7 @@ export class UserInterfaceManager implements UserInterface<string> {
         winner.innerText = "YOU WIN";
       }
     } else {
-      winner.innerText = `Tie!`;
+      winner.innerText = `Tie`;
     }
     winnerContainer.append(winner);
     resultElement.append(winner);
