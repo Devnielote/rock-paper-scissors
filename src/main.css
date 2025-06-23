@@ -100,14 +100,15 @@
       .score_container {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         min-width: 230px;
-        max-width: 350px;
+        max-width: 500px;
         padding-inline-start: 1rem;
         padding-inline-end: .4rem;
         padding-block: .5rem;
         border: 2px solid var(--header-outline);
-        border-radius: 4px;
+        border-radius: 6px;
       }
 
       .score_container_plays {
@@ -121,22 +122,22 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 3.5rem;
-        height: 3rem;
-        padding-inline: .6rem;
-        padding-block: .2rem;
+        height: 4rem;
+        padding-inline: 1.8rem;
         text-align: center;
         background-color: white;
         border-radius: 3px;
         line-height: 1rem;
         
         p {
+          margin-block-end: .3rem;
           font-size: .6rem;
           color: var(--score-text);
           letter-spacing: 1px;
         }
         
         span {
+          margin-block-end: .8rem;
           color: var(--header-outline);
           font-size: 2rem;
         }
@@ -176,6 +177,9 @@
             background-size: 50%;
             background-position: center;
             background-color: white;
+            box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
+            -webkit-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
+            -moz-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
           }
         }
       }
@@ -188,7 +192,7 @@
       align-items: center;
       width: 100%;
       min-width: 300px;
-      max-width: 300px;
+      max-width: 700px;
       margin-block-start: 5rem;
       text-align: center;
 
@@ -205,6 +209,9 @@
           background-size: 50%;
           background-position: center;
           background-color: white;
+          box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
+          -webkit-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
+          -moz-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
         }
       }
 
@@ -226,8 +233,6 @@
         }
       }
     }
-
-
 
    footer {
       display: flex;
@@ -261,6 +266,9 @@
     height: 120px;
     margin-block-end: 1.3rem;
     border-radius: 100%;
+  box-shadow: 0px -4px 9px 3px rgba(0,0,0,0.75) inset;
+-webkit-box-shadow: 0px -4px 9px 3px rgba(0,0,0,0.75) inset;
+-moz-box-shadow: 0px -4px 9px 3px rgba(0,0,0,0.75) inset;
   }
 
   .button_outline_rock {
@@ -278,10 +286,95 @@
 
 @layer media {
 
-  @media (width > 32rem) {
-    .main_container {
-      background-color: red;
+  @media (width > 36rem) {
+
+    header {
+      .score_container {
+        .score_container_plays {
+          font-size: 1.8rem;
+          line-height: 1.5rem;
+        }
+
+        .score_container_score {
+          span {
+            font-size: 2.5rem;
+          }
+        }
+      }
+    }
+    .main_play_container {
+
+      .plays_container {
+
+        .available_plays {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          min-width: 290px;
+          max-width: 450px;
+          margin-block-start: 5rem;
+          background: url('../src/assets/images/bg-triangle.svg');
+          background-size: 90% 250px;
+          background-clip: content-box;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-position-y: 80px;
+
+          button {
+            width: 130px;
+            height: 130px;
+          }
+        }
+      }
+
+      .results_container {
+        display: grid;
+        grid-template-areas: 
+        "player result cpu"
+        ;
+        margin-block-start: 2rem;
+
+        .player_play_container {
+          grid-area: player;
+        }
+
+        .cpu_play_container {
+          grid-area: cpu;
+        }
+
+        .winner_container {
+          margin-block-start: 0;
+          grid-area: result;
+        }
+
+        .player_play_container, .cpu_play_container {
+          flex-direction: column-reverse;
+
+          p {
+            margin-block-end: 2.5rem;
+          }
+          
+          button {
+            width: 130px;
+            height: 130px;
+          }
+        }
+
+
+      }
+
+
+      .button_outline {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    footer {
+      justify-content: end;
+      align-items: center;
     }
   }
-
 }
