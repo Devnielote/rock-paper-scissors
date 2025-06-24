@@ -85,6 +85,7 @@
     border-radius: 3px;
     font-size: .6rem;
     color: var(--header-outline);
+    cursor: pointer;
   }
 }
 
@@ -212,6 +213,7 @@
           box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
           -webkit-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
           -moz-box-shadow: 0px 1px 9px 3px rgba(0,0,0,0.75) inset;
+          cursor: none;
         }
       }
 
@@ -281,6 +283,48 @@
 
   .button_outline_scissors {
     background: linear-gradient(var(--scissors-gradient), var(--scissors-gradient2));
+  }
+
+  .rules_overlay {
+    position: fixed;
+    top:0;
+    left: 0;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+
+    .rules_modal {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 578px;
+      height: 100%;
+      padding-block-start: 5rem;
+      padding-block-end: 4rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20rem;
+      background-color: white;
+      p {
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--header-outline);
+      }
+      .close_rules {
+        width: 20px;
+        height: 20px;
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -375,6 +419,24 @@
     footer {
       justify-content: end;
       align-items: center;
+    }
+    .rules_overlay {
+      .rules_modal {
+        flex-direction: row-reverse;
+        align-items: start;
+        width: 25rem;
+        height: 25rem;
+        border-radius: 10px;
+        padding: 0;
+        padding-inline: 2rem;
+        padding-block-start: 1rem;
+        background-position-y: 100px;
+        background-size: 18rem;
+
+        .close_rules {
+          margin-block-start: .8rem;
+        }
+      }
     }
   }
 }
