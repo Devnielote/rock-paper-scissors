@@ -16,9 +16,6 @@ export class UserInterfaceManager implements UserInterface<string> {
   cleanWinnersContainer(): void {
     const availablePlaysContainer = document.getElementById('plays-container')!;
     availablePlaysContainer.classList.remove('hide');
-    
-    const resultsContainer = document.getElementById('results-container')!;
-    //resultsContainer.classList.add('hide');
 
     const playerPlayContainer = document.getElementById('player-play-container')!;
     playerPlayContainer.innerHTML = "";
@@ -182,4 +179,39 @@ export class UserInterfaceManager implements UserInterface<string> {
 
     winnerContainer.append(playAgainButtonContainer);
   };
+
+  renderRulesButton(): void {
+    const button = document.createElement('button');
+    button.innerText = 'RULES'
+    const footer = document.getElementById('footer')!;
+    footer.append(button);
+
+    button.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.id = 'rules-overlay';
+      overlay.classList.add('rules_overlay');
+
+      const modal = document.createElement('div');
+      modal.id = 'rules-modal';
+      modal.classList.add('rules_modal');
+      modal.style.backgroundImage = `url("../../src/assets/images/image-rules.svg")`;
+
+      const text = document.createElement('p');
+      text.innerText = "RULES";
+
+      const closeBtn = document.createElement('div');
+      closeBtn.style.backgroundImage = `url("../../src/assets/images/icon-close.svg")`
+      closeBtn.id = 'close-rules';
+      closeBtn.classList.add('close_rules')
+
+      modal.append(closeBtn,text);
+
+      overlay.append(modal);
+      document.body.append(overlay);
+
+      document.getElementById('close-rules')!.addEventListener('click', () => {
+        document.body.removeChild(overlay);;
+      })
+    });
+  }
 };
