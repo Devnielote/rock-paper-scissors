@@ -25,6 +25,7 @@ export class ClassicGameSession implements GameSession{
 
   startGame(): void {
     const availablePlays = this.gameMatch.getAvailablePlays();
+    this.userInterface.renderRulesButton();
 
     const handlePlayerPlay = async () => {
       this.userInterface.cleanWinnersContainer();
