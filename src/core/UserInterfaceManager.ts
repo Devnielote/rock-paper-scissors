@@ -90,12 +90,14 @@ export class UserInterfaceManager implements UserInterface<string> {
     plays.forEach(play => {
       const buttonOutlineElement = document.createElement('div');
       const button = document.createElement('button');
+      const buttonImg = document.createElement('img');
 
       buttonOutlineElement.classList.add('button_outline');
       buttonOutlineElement.classList.add(`button_outline_${play}`);
 
-      button.style.backgroundImage = `url(${playIcons[play]})`;
-      console.log(playIcons[play]);
+      buttonImg.src = `${playIcons[play]}`;
+      button.append(buttonImg);
+
       button.onclick = () => {
         if (this.userPlayResolver) {
           this.userPlayResolver(play);
@@ -124,11 +126,14 @@ export class UserInterfaceManager implements UserInterface<string> {
   renderUserPlay(play: ClassicPlays | BigBangPlays): void {
     const buttonContainer = document.createElement('div');  
     const button = document.createElement('button');
+    const buttonImg = document.createElement('img');
     const text = document.createElement('p');
+
+    buttonImg.src = `${playIcons[play]}`;
+    button.append(buttonImg);
 
     text.innerText = "YOU PICKED";
 
-    button.style.backgroundImage = `url(${playIcons[play]})`;
     buttonContainer.classList.add('button_outline');
     buttonContainer.classList.add(`button_outline_${play}`);
 
@@ -143,9 +148,13 @@ export class UserInterfaceManager implements UserInterface<string> {
 
     const buttonContainer = document.createElement('div');  
     const button = document.createElement('button');
+    const buttonImg = document.createElement('img');
 
     const text = document.createElement('p');
     text.innerText = "THE HOUSE PICKED";
+
+    buttonImg.src = `${playIcons[play]}`;
+    button.append(buttonImg);
 
 
     button.style.backgroundImage = `url(${playIcons[play]})`;
@@ -212,10 +221,13 @@ export class UserInterfaceManager implements UserInterface<string> {
       text.innerText = "RULES";
 
       const closeBtn = document.createElement('div');
-      closeBtn.style.backgroundImage = `url(${closeImg})`
+      const closeImgBtn = document.createElement('img');
+      closeImgBtn.src = `${closeImg}`;
+
       closeBtn.id = 'close-rules';
       closeBtn.classList.add('close_rules')
 
+      closeBtn.append(closeImgBtn);
       modal.append(closeBtn,text);
 
       overlay.append(modal);
