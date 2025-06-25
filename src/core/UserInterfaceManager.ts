@@ -1,7 +1,18 @@
 import { Player } from "./interfaces/Player";
 import { UserInterface } from "./interfaces/UserInterface";
 import { BigBangMode, BigBangPlays, ClassicMode, ClassicPlays } from "./types/types";
-import { delay } from "./utils/delay";
+
+import rockImg from '../assets/images/icon-rock.svg';
+import paperImg from '../assets/images/icon-paper.svg';
+import scissorsImg from '../assets/images/icon-scissors.svg';
+import rulesImg from '../assets/images/image-rules.svg';
+import closeImg from '../assets/images/icon-close.svg';
+
+const playIcons: Record<string, string> = {
+  rock: rockImg,
+  paper: paperImg,
+  scissors: scissorsImg,
+};
 
 export class UserInterfaceManager implements UserInterface<string> {
 
@@ -83,7 +94,8 @@ export class UserInterfaceManager implements UserInterface<string> {
       buttonOutlineElement.classList.add('button_outline');
       buttonOutlineElement.classList.add(`button_outline_${play}`);
 
-      button.style.backgroundImage = `url('../src/assets/images/icon-${play}.svg')`
+      button.style.backgroundImage = `url(${playIcons[play]})`;
+      console.log(playIcons[play]);
       button.onclick = () => {
         if (this.userPlayResolver) {
           this.userPlayResolver(play);
@@ -116,7 +128,7 @@ export class UserInterfaceManager implements UserInterface<string> {
 
     text.innerText = "YOU PICKED";
 
-    button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
+    button.style.backgroundImage = `url(${playIcons[play]})`;
     buttonContainer.classList.add('button_outline');
     buttonContainer.classList.add(`button_outline_${play}`);
 
@@ -136,7 +148,7 @@ export class UserInterfaceManager implements UserInterface<string> {
     text.innerText = "THE HOUSE PICKED";
 
 
-    button.style.backgroundImage = `url("../../src/assets/images/icon-${play}.svg")`;
+    button.style.backgroundImage = `url(${playIcons[play]})`;
     buttonContainer.classList.add('button_outline');
     buttonContainer.classList.add(`button_outline_${play}`);
     buttonContainer.append(button);
@@ -194,13 +206,13 @@ export class UserInterfaceManager implements UserInterface<string> {
       const modal = document.createElement('div');
       modal.id = 'rules-modal';
       modal.classList.add('rules_modal');
-      modal.style.backgroundImage = `url("../../src/assets/images/image-rules.svg")`;
+      modal.style.backgroundImage = `url(${rulesImg})`;
 
       const text = document.createElement('p');
       text.innerText = "RULES";
 
       const closeBtn = document.createElement('div');
-      closeBtn.style.backgroundImage = `url("../../src/assets/images/icon-close.svg")`
+      closeBtn.style.backgroundImage = `url(${closeImg})`
       closeBtn.id = 'close-rules';
       closeBtn.classList.add('close_rules')
 

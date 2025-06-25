@@ -5,6 +5,7 @@ export default defineConfig({
   root: '.', // raíz del proyecto (puede cambiarse si usas una carpeta /public o /app)
   build: {
     outDir: 'dist',
-  }
+  },
+  base: '/rock-paper-scissors/'
 })
 
